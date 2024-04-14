@@ -1,0 +1,64 @@
+# AWS EC2 WAR Deployment with Nginx
+
+This project demonstrates the process of deploying a Java Web Application Archive (WAR) on an Amazon Web Services (AWS) EC2 instance and hosting it using Nginx as a reverse proxy.
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+- An AWS account.
+- AWS CLI installed and configured.
+- Java JDK installed on your local machine.
+
+## Installation
+
+### Step 1: Setting up the AWS EC2 Instance
+
+1. **Launch an EC2 Instance**:
+   - Log into your AWS Management Console.
+   - Navigate to the EC2 Dashboard and launch a new instance.
+   - Select an Amazon Machine Image (AMI) that supports Java (e.g., Amazon Linux 2).
+   - Choose an instance type and configure instance details.
+   - Add storage if necessary and configure security groups to allow HTTP and SSH traffic.
+
+2. **Connect to Your Instance**:
+   - After the instance is up and running, connect to it using SSH.
+
+### Step 2: Installing Java and Nginx
+
+```bash
+sudo yum update -y
+sudo yum install java-1.8.0-openjdk-devel -y
+sudo amazon-linux-extras install nginx1 -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+
+
+Step 3: Deploying the WAR File
+Transfer Your WAR File:
+
+Use SCP or SFTP to transfer your WAR file from your local machine to the EC2 instance.
+Deploy WAR File:
+
+Move the WAR file into the appropriate web server directory (e.g., /var/lib/tomcat/webapps/ for Tomcat).
+Step 4: Configuring Nginx as a Reverse Proxy
+Configure Nginx:
+
+Edit the Nginx configuration file to reverse proxy to your Java application.
+
+server {
+    listen 80;
+    server_name your_domain.com;
+
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+Restart Nginx:
+
+To apply the changes, restart Nginx.
+
+sudo systemctl restart nginx
