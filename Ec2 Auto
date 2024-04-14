@@ -1,0 +1,56 @@
+a simple script for automating the creation of an AWS EC2 instance using Terraform. This script will allow users to easily deploy an EC2 instance with basic configurations
+
+1. Terraform Setup
+First, you need to have Terraform installed. You can download and install Terraform from the official Terraform website.
+
+2. Terraform Script for EC2 Instance
+Create a file named main.tf in your repository, which will contain the following Terraform configuration:
+
+hcl
+Copy code
+provider "aws" {
+  region = "us-east-1" # You can change the region as needed
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0" # Example AMI ID; replace with a valid one for your region
+  instance_type = "t2.micro" # You can change the instance type as needed
+
+  tags = {
+    Name = "TerraformExample"
+  }
+}
+3. Initializing and Applying Terraform Configuration
+To use this script:
+
+Initialize Terraform:
+Open your command line interface (CLI), navigate to the directory containing your main.tf file, and run:
+
+bash
+Copy code
+terraform init
+This command initializes Terraform by downloading the necessary provider plugins.
+
+Plan the Deployment:
+To see what Terraform plans to do without actually making any changes, run:
+
+bash
+Copy code
+terraform plan
+This command shows which resources Terraform will create, modify, or destroy.
+
+Apply the Configuration:
+To create the EC2 instance, execute:
+
+bash
+Copy code
+terraform apply
+Terraform will ask for confirmation before proceeding. After confirming, Terraform will create the EC2 instance as specified in the main.tf file.
+
+4. Destroying the Instance
+When you no longer need the instance, you can destroy all resources created by Terraform, which in this case is just the EC2 instance, by running:
+
+bash
+Copy code
+terraform destroy
+Terraform will ask for confirmation before deleting the instance.
