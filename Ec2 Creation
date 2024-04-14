@@ -1,0 +1,55 @@
+# EC2 Instance Creation Automation
+
+This repository contains scripts and instructions for automating the creation and management of AWS EC2 instances, designed specifically for DevOps practices. Utilize this repository to streamline your infrastructure setup and ensure consistent, reproducible environments.
+
+## Features
+
+- **Automated EC2 Instance Creation**: Scripts to automatically launch and configure EC2 instances based on predefined configurations.
+- **Configuration Management**: Integration with tools like Ansible or Terraform to manage instance configurations.
+- **Security Setup**: Automated security group and key pair configurations to enhance security.
+- **Cost Optimization**: Guidance on choosing the right EC2 instances and resources to optimize costs.
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+- AWS account with appropriate permissions
+- AWS CLI installed and configured
+- Terraform or Ansible (depending on your preference) installed on your local machine
+
+## Quick Start
+
+1. **Clone the Repository**
+git clonehttps://github.com/rootuser39/cu-dashboard-devops.git
+
+cd ec2-creation-automation
+
+
+2. **Configure Your AWS CLI**
+Ensure your AWS CLI is configured with at least the following:
+
+aws configure
+
+
+3. **Run the Setup Script**
+To launch your EC2 instances, run:
+
+erraform apply # If using Terraform
+ansible-playbook setup.yml # If using Ansible
+
+
+## Configuration
+
+Edit the configuration files in the `configs` directory to match your desired specifications for the EC2 instances.
+
+- **Terraform**: Modify the `main.tf` to adjust instance types, AMIs, and other resources.
+- **Ansible**: Update the `vars/default.yml` with necessary variables to configure your instances post-provision.
+
+## Security
+
+Security is paramount. Ensure you review and adjust the security settings, including:
+- Security Groups
+- EC2 Key Pairs
+- IAM Roles and Policies
+
+
+
